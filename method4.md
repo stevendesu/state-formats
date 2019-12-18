@@ -133,8 +133,8 @@ state.models.allIds.forEach(id => {
 	let model = state.models.byId[id];
 	let names = [].concat.apply([], [
 		["type", "id"],
-		model.fields.map(f_id => state.fields.byId[f_id].name),
-		model.relations.map(r_id => state.relations.byId[r_id].name)
+		model.fields.allIds.map(f_id => model.fields.byId[f_id].name),
+		model.relations.allIds.map(r_id => model.relations.byId[r_id].name)
 	]);
 	let counts = names.reduce((acc, name) => ({
 		...acc,
