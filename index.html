@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>Blah</title>
+	<style>
+		.tab {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<a href="javascript:void(0);" onclick="goTo(1)">Method 1</a>
+	<a href="javascript:void(0);" onclick="goTo(2)">Method 2</a>
+	<a href="javascript:void(0);" onclick="goTo(3)">Method 3</a>
+	<a href="javascript:void(0);" onclick="goTo(4)">Method 4</a>
+	<a href="javascript:void(0);" onclick="goTo(5)">Method 5</a>
+	<div id="method1" class="tab"></div>
+	<div id="method2" class="tab"></div>
+	<div id="method3" class="tab"></div>
+	<div id="method4" class="tab"></div>
+	<div id="method5" class="tab"></div>
+	<script src="node_modules/marked/lib/marked.js"></script>
+	<script>
+		var tabs = document.getElementsByClassName("tab");
+		[].forEach.apply(tabs, [tab =>
+		{
+			fetch(tab.id + ".md")
+				.then(resp => resp.text)
+				.then(resp => tab.innerHTML = marked(resp));
+		}]);
+
+		function goTo(x)
+		{
+			[].forEach.apply(tabs, [tab => tab.style.display = "none"]);
+			tabs[x - 1].style.display = "block";
+		}
+	</script>
+</body>
+</html>
