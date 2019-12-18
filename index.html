@@ -24,7 +24,7 @@
 		[].forEach.apply(tabs, [tab =>
 		{
 			fetch(tab.id + ".md")
-				.then(resp => resp.text)
+				.then(resp => resp.text())
 				.then(resp => tab.innerHTML = marked(resp));
 		}]);
 
